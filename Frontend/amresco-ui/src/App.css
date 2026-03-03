@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: linear-gradient(#f8fafc, #edf2f7);
+  color: #1f2937;
+}
+
+.container {
+  width: 100%;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 100px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nav-left img {
+  height: 45px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.signin {
+  background: #2f855a;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 60px 100px;
+  gap: 60px;
+}
+
+/* LEFT SIDE */
+.left {
+  width: 55%;
+}
+
+.left h1 {
+  font-size: 40px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.left span {
+  color: #2f855a;
+}
+
+.left p {
+  margin-bottom: 35px;
+  color: #4b5563;
+}
+
+/* UPLOAD CARD */
+.upload-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  max-width: 500px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.upload-card h3 {
+  margin-bottom: 15px;
+}
+
+.drop-area {
+  border: 2px dashed #d1d5db;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.drop-area img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.choose {
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.upload-btn {
+  width: 100%;
+  background: #2f855a;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* FEATURES */
+.features {
+  display: flex;
+  gap: 40px;
+  margin: 25px 0;
+}
+
+.features div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.features img {
+  width: 32px;
+}
+
+.bottom-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+/* RIGHT SIDE */
+.right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 550px;
+}
+
+/* ABOUT CARD */
+.about {
+  background: #eaf4ef;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.about h2 {
+  margin-bottom: 15px;
+}
+
+.about p {
+  color: #4b5563;
+  margin-bottom: 15px;
+}
+
+.about ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.about li {
+  margin-bottom: 8px;
+}
+
+.footer {
+  font-style: italic;
+  color: #4b5563;
+}
