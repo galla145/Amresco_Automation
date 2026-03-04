@@ -245,7 +245,7 @@ def run_hot_inference(results_dict):
     HOT INFERENCE: Uses the pre-trained 'Brain' to flag anomalies in milliseconds.
     """
     if not os.path.exists(MODEL_PATH) or not os.path.exists(ENCODER_PATH):
-        print("⚠️ No trained model found. Running first-time detection on current batch only.")
+        print("No trained model found. Running first-time detection on current batch only.")
         return results_dict
 
     clf = joblib.load(MODEL_PATH)
