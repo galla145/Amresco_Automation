@@ -1,0 +1,104 @@
+.missing-container {
+  background: #f6f9fc;
+  min-height: 100vh;
+  padding: 20px 40px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* TITLE */
+.missing-title {
+  font-size: 30px;
+  margin: 40px 0 25px 0;
+  color: #1a365d;
+}
+
+/* TABLE WRAPPER */
+.missing-content {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+}
+
+.missing-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 1100px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* HEADER */
+.missing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.missing-header h3 {
+  font-size: 18px;
+  color: #1a365d;
+}
+
+/* TABLE */
+.missing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.missing-table thead {
+  background: #eef4fb;
+}
+
+.missing-table th,
+.missing-table td {
+  padding: 14px;
+  text-align: left;
+}
+
+.missing-table th {
+  font-weight: 600;
+  color: #1a365d;
+}
+
+.missing-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.missing-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* RADIO */
+.missing-table input[type="radio"] {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+/* ANALYZE BUTTON */
+.missing-analyze-btn {
+  background: #2f855a;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.missing-analyze-btn:hover {
+  background: #276749;
+}
+
+.missing-analyze-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* EMPTY */
+.no-files {
+  margin-top: 15px;
+  color: #6b7280;
+  font-style: italic;
+}

@@ -1,0 +1,192 @@
+.dashboard-container {
+  background: #f6f9fc;
+  min-height: 100vh;
+  padding: 20px 40px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.nav-left img {
+  height: 45px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1a365d;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-links a.active {
+  font-weight: 600;
+  color: #2f855a;
+}
+
+.signin {
+  background: #2f855a;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.signin:hover {
+  background: #276749;
+}
+
+/* ================= TITLE ================= */
+
+.title {
+  font-size: 30px;
+  margin: 40px 0 25px 0;   /* moved down */
+  color: #1a365d;
+}
+
+/* ================= TOP BAR ================= */
+
+/* Top bar containing search + upload button */
+.top-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 12px 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Search wrapper */
+.search-wrapper {
+  position: relative;
+  flex: 1;              /* search takes available space */
+  max-width: 450px;     /* limit search size */
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 35px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Search icon inside input */
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #777;
+}
+
+/* Upload button fixed to right corner */
+.upload-btn {
+  background: #2f855a;
+  color: white;
+  border: none;
+  padding: 6px 10px;       /* smaller button */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  flex: 0 0 auto;          /* prevent stretching */
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: auto;        /* push to right corner */
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  margin-top: 25px;
+  flex-wrap: wrap;          /* responsive wrap if needed */
+}
+
+/* ================= TABLE ================= */
+
+.content {
+  margin-top: 35px;
+}
+
+.table-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #eef4fb;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+}
+
+.file-name {
+  color: #1a365d;
+  font-weight: 500;
+}
+
+.analyze-btn {
+  background: #2f855a;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.analyze-btn:hover {
+  background: #276749;
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.pagination .active {
+  background: #2f855a;
+  color: white;
+  border: none;
+}

@@ -1,0 +1,65 @@
+.features-wrapper {
+  position: relative;
+}
+
+/* Make it look like normal nav link */
+.nav-feature-link {
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-feature-link:hover {
+  color: #2f855a;
+}
+
+/* Dropdown panel */
+.features-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 350px;
+  max-height: 380px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  z-index: 1000;
+}
+
+/* Scrollbar */
+.features-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.features-dropdown::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.feature-item {
+  padding: 15px 10px;
+  border-bottom: 1px solid #eee;
+  transition: 0.2s ease;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item:hover {
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.feature-item h4 {
+  margin-bottom: 5px;
+  color: #1a365d;
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: #4b5563;
+}
