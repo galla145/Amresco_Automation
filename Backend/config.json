@@ -1,0 +1,25 @@
+{
+    "thresholds": {
+        "math_mismatch": 2.0,
+        "max_perf": 100.0
+    },
+    "month_map": {
+        "January": "Jan",
+        "February": "Feb",
+        "March": "Mar",
+        "April": "Apr",
+        "May": "May",
+        "June": "Jun",
+        "July": "Jul",
+        "August": "Aug",
+        "September": "Sep",
+        "October": "Oct",
+        "November": "Nov",
+        "December": "Dec",
+        "Q1": "1st Qtr",
+        "Q2": "2nd Qtr",
+        "Q3": "3rd Qtr",
+        "Q4": "4th Qtr",
+        "YTD": "Year to Date"
+    }
+}

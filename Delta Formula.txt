@@ -1,0 +1,18 @@
+Delta Formula
+
+Difference between actual and expected production.
+
+Delta = Actual - Expected
+
+Example
+
+Actual = 1100
+Expected = 1000
+
+Delta = 100
+Performance %
+
+Performance = (Actual - Expected) / Expected * 100
+
+Example
+

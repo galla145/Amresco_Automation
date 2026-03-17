@@ -1,21 +1,48 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFiles } from "../services/api";
+import { getFiles, analyzeFile } from "../services/api";
 import logo from "../assets/logo.png";
 import "./Dashboard.css";
 import FeaturesPanel from "../components/FeaturesPanel";
+import AccountDropdown from "../components/AccountDropdown";
 
 export default function Dashboard() {
   const [files, setFiles] = useState([]);
+  const [loadingFile, setLoadingFile] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch uploaded files
   useEffect(() => {
-    getFiles().then((res) => setFiles(res.data));
+    getFiles()
+      .then((res) => setFiles(res.data))
+      .catch((err) => console.error(err));
   }, []);
+
+  // Analyze selected file
+  const handleAnalyze = async (filename) => {
+    try {
+      setLoadingFile(filename);
+
+      const res = await analyzeFile(filename);
+      console.log("Analysis result:", res.data);
+
+      navigate("/analysis", {
+        state: {
+          data: res.data,
+          filename: filename,
+        },
+      });
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      alert("Analysis failed");
+    } finally {
+      setLoadingFile(null);
+    }
+  };
 
   return (
     <div className="dashboard-container">
-      
+
       {/* NAVBAR */}
       <header className="navbar">
         <div className="nav-left">
@@ -28,14 +55,27 @@ export default function Dashboard() {
           <FeaturesPanel />
           <a>Reports</a>
           <a>Help</a>
-          <button className="signin">Sign In</button>
+          {!localStorage.getItem("user") ? (
+
+              <button
+                    className="signin"
+                    onClick={() => navigate("/signin")}
+               >
+                    Sign In
+              </button>
+
+           ) : (
+
+                <AccountDropdown />
+
+           )}
         </nav>
       </header>
 
       {/* TITLE */}
       <h1 className="title">Dashboard</h1>
 
-      {/* Search + Upload */}
+      {/* SEARCH + UPLOAD */}
       <div className="top-bar">
         <div className="search-wrapper">
           <span className="search-icon">🔍</span>
@@ -54,9 +94,10 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* TABLE SECTION */}
+      {/* TABLE */}
       <div className="content">
         <div className="table-card">
+
           <table>
             <thead>
               <tr>
@@ -74,8 +115,14 @@ export default function Dashboard() {
                   <td>{file.uploaded_at}</td>
                   <td>{file.size_kb} KB</td>
                   <td>
-                    <button className="analyze-btn">
-                      Analyze
+                    <button
+                      className="analyze-btn"
+                      onClick={() => handleAnalyze(file.name)}
+                      disabled={loadingFile === file.name}
+                    >
+                      {loadingFile === file.name
+                        ? "Analyzing..."
+                        : "Analyze"}
                     </button>
                   </td>
                 </tr>
@@ -83,6 +130,7 @@ export default function Dashboard() {
             </tbody>
           </table>
 
+          {/* PAGINATION */}
           <div className="pagination">
             <span>
               Showing 1 to {files.length} of {files.length} entries
@@ -94,8 +142,10 @@ export default function Dashboard() {
               <button disabled>Next</button>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
   );
 }

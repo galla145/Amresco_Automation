@@ -26,7 +26,7 @@ export default function FeaturesPanel() {
 
   return (
     <div className="features-wrapper" ref={panelRef}>
-      
+
       {/* NORMAL NAVBAR LINK (NO BOX) */}
       <a
         className="nav-feature-link"
@@ -38,6 +38,7 @@ export default function FeaturesPanel() {
       {open && (
         <div className="features-dropdown">
 
+          {/* Missing Values */}
           <div
             className="feature-item"
             onClick={() => handleNavigate("/missing-values")}
@@ -46,25 +47,34 @@ export default function FeaturesPanel() {
             <p>Detect and report cells with missing or blank values.</p>
           </div>
 
-          <div className="feature-item">
+          {/* Anomaly Detection */}
+          <div
+            className="feature-item"
+            onClick={() => handleNavigate("/anomaly-detection")}
+          >
             <h4>Anomaly Detection</h4>
             <p>Identify and highlight anomalies and outliers in your data.</p>
           </div>
 
-          <div className="feature-item">
+          {/* AI Notes */}
+          <div
+            className="feature-item"
+            onClick={() => handleNavigate("/ai-notes")}
+          >
             <h4>AI Notes</h4>
             <p>Get AI-generated notes summarizing key insights from Excel data.</p>
           </div>
 
-          <div className="feature-item">
+          {/* Formula Analysis */}
+          <div
+            className="feature-item"
+            onClick={() => handleNavigate("/formula-analysis")}
+          >
             <h4>Formula Analysis</h4>
             <p>Review and validate Excel formulas for errors and inconsistencies.</p>
           </div>
 
-          <div className="feature-item">
-            <h4>Performance Metrics</h4>
-            <p>Generate business performance indicators automatically.</p>
-          </div>
+          
 
         </div>
       )}

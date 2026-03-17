@@ -1,0 +1,7 @@
+cd C:\Users\allad\Desktop\job_offer\AGS\AMRESCO_Automation\Backend
+uvicorn main:app --reload
+
+
+Supabase password : Agalla@6146
+
+

@@ -1,8 +1,26 @@
+# main.py
+
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from datetime import datetime
-import pandas as pd
+
+# Supabase
+from supabase import create_client, Client
+
+# Import analysis functions
+from scripts.ai_notes import  analyze_file as analyze_ainotes
+from missing_detection import analyze_missing_values
+from anomaly_detection import analyze_file as analyze_anomalies
+from formula_detection import analyze_formula_errors
+
+# -----------------------------
+# Supabase Configuration
+# -----------------------------
+SUPABASE_URL = "https://qvdzlwzjodciqsvizbgf.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2ZHpsd3pqb2RjaXFzdml6YmdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMTYyNzAsImV4cCI6MjA4ODY5MjI3MH0.2mqj_-ZL0A2PiuR-sOkvL2a347iFibkRqMZi-ABAqRo"
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # -----------------------------
 # Paths
@@ -20,14 +38,14 @@ app = FastAPI(
 )
 
 # -----------------------------
-# CORS (Frontend Access)
+# CORS
 # -----------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # In production, restrict to frontend domain
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
 # -----------------------------
@@ -38,16 +56,13 @@ def health_check():
     return {"status": "AMRESCO backend running"}
 
 # -----------------------------
-# Upload XLSX File
+# Upload File
 # -----------------------------
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
 
     if not file.filename.lower().endswith(".xlsx"):
-        raise HTTPException(
-            status_code=400,
-            detail="Only XLSX files are allowed"
-        )
+        raise HTTPException(status_code=400, detail="Only XLSX files allowed")
 
     file_path = os.path.join(UPLOAD_DIR, file.filename)
 
@@ -55,10 +70,7 @@ async def upload_file(file: UploadFile = File(...)):
         with open(file_path, "wb") as f:
             f.write(await file.read())
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"File upload failed: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=str(e))
 
     return {
         "message": "File uploaded successfully",
@@ -66,15 +78,14 @@ async def upload_file(file: UploadFile = File(...)):
     }
 
 # -----------------------------
-# List Uploaded Files
+# List Files
 # -----------------------------
 @app.get("/files")
 def get_uploaded_files():
-    files = []
 
+    files = []
     for filename in os.listdir(UPLOAD_DIR):
         path = os.path.join(UPLOAD_DIR, filename)
-
         if os.path.isfile(path):
             files.append({
                 "name": filename,
@@ -87,10 +98,10 @@ def get_uploaded_files():
     return files
 
 # -----------------------------
-# Analyze Missing Values
+# Analyze File
 # -----------------------------
 @app.get("/analyze/{filename}")
-def analyze_file(filename: str):
+def analyze_excel_file(filename: str):
 
     file_path = os.path.join(UPLOAD_DIR, filename)
 
@@ -98,82 +109,82 @@ def analyze_file(filename: str):
         raise HTTPException(status_code=404, detail="File not found")
 
     try:
-        xls = pd.ExcelFile(file_path)
-        sheets = xls.sheet_names
+        # -----------------------------
+        # Missing values analysis
+        # -----------------------------
+        missing_result = analyze_missing_values(file_path)
+        missing_issues = missing_result.get("issues", [])
+
+        # -----------------------------
+        # Anomaly detection
+        # -----------------------------
+        anomaly_result = analyze_anomalies(file_path)
+
+        # -----------------------------
+        # Formula analysis
+        # -----------------------------
+        formula_result = analyze_formula_errors(file_path)
+        formula_issues = formula_result.get("issues", [])
+        formula_error_count = formula_result.get("formula_errors", len(formula_issues))
+        
+         # -----------------------------
+        # ✅ AI NOTES (NEW)
+        # -----------------------------
+        # You can pass month dynamically later
+        ainotes_results, ainotes_mismatches = analyze_ainotes(file_path, "August")
+
+        # 🔥 CLEAN Gemini errors (IMPORTANT)
+        for r in ainotes_mismatches or []:
+            if "suggestion" in r and str(r["suggestion"]).startswith("Error:"):
+                r["suggestion"] = "Investigate performance drop using historical trends and site inspection."
+
+
+        # -----------------------------
+        # Summary calculations
+        # -----------------------------
+        total_cells = missing_result.get("total_cells", 0)
+        missing_values = len(missing_issues)
+        missing_percentage = missing_result.get("percentage", 0)
+        abnormal_values_count = len([
+            a for a in anomaly_result
+            if a.get("issue_type") == "abnormal value"
+        ])
+        underperform_sites_count = len(set([
+            a.get("site")
+            for a in anomaly_result
+            if a.get("issue_type") == "underperforming site"
+        ]))
+
+        # -----------------------------
+        # Save to Supabase
+        # -----------------------------
+        supabase.table("analysis_results").insert({
+            "filename": filename,
+            "total_cells": total_cells,
+            "missing_values": missing_values,
+            "missing_percentage": missing_percentage,
+            "abnormal_values": abnormal_values_count,
+            "underperforming_sites": underperform_sites_count,
+            "formula_errors": formula_error_count
+        }).execute()
+
+        # -----------------------------
+        # API Response
+        # -----------------------------
+        return {
+            "message": "Analysis completed",
+            "summary": {
+                "total_cells": total_cells,
+                "missing_values": missing_values,
+                "percentage": missing_percentage,
+                "abnormal_values": abnormal_values_count,
+                "underperforming_sites": underperform_sites_count,
+                "formula_errors": formula_error_count
+            },
+            "missing": missing_issues,
+            "anomalies": anomaly_result,
+            "formulas": formula_issues
+        }
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-    total_missing = 0
-    total_entries = 0
-
-    empty_count = 0
-    na_count = 0
-    zero_count = 0
-
-    sheet_summary = []
-    sheet_details = {}
-
-    for sheet in sheets:
-        df = pd.read_excel(file_path, sheet_name=sheet)
-
-        sheet_total = df.size
-        total_entries += sheet_total
-
-        # Detect Empty Cells
-        empty_cells = (df == "").sum().sum()
-        empty_count += int(empty_cells)
-
-        # Detect N/A values
-        na_cells = df.isin(["N/A", "NA", "n/a"]).sum().sum()
-        na_count += int(na_cells)
-
-        # Detect Zero values
-        zero_cells = (df == 0).sum().sum()
-        zero_count += int(zero_cells)
-
-        # Combined missing logic
-        missing_mask = (
-            (df == "") |
-            (df.isin(["N/A", "NA", "n/a"])) |
-            (df == 0)
-        )
-
-        sheet_missing = missing_mask.sum().sum()
-        total_missing += int(sheet_missing)
-
-        sheet_summary.append({
-            "sheet_name": sheet,
-            "total_entries": int(sheet_total),
-            "missing_values": int(sheet_missing)
-        })
-
-        # Rows containing missing values
-        missing_rows = df[missing_mask.any(axis=1)]
-
-        sheet_details[sheet] = (
-            missing_rows
-            .fillna("-")
-            .astype(str)
-            .to_dict(orient="records")
-        )
-
-    percent_incomplete = (
-        round((total_missing / total_entries) * 100, 1)
-        if total_entries > 0 else 0
-    )
-
-    return {
-        "summary_cards": {
-            "total_sheets": len(sheets),
-            "total_missing": total_missing,
-            "percent_incomplete": percent_incomplete,
-            "filled_entries": total_entries - total_missing
-        },
-        "breakdown": {
-            "empty_cells": empty_count,
-            "na_values": na_count,
-            "zero_values": zero_count
-        },
-        "sheet_summary": sheet_summary,
-        "sheet_details": sheet_details
-    }

@@ -1,0 +1,92 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+/* TITLE */
+.title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fileName {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* SUMMARY */
+.summaryCards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.card {
+  flex: 1;
+  max-width: 220px;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+/* COLORS */
+.green {
+  background: #2e8b57;
+}
+
+.pink {
+  background: #e83e8c;
+}
+
+/* SECTION */
+.sectionBox {
+  background: #f5f7fb;
+  padding: 12px 18px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* CONTENT */
+.content {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #1e2a38;
+  color: white;
+  padding: 10px;
+}
+
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* COLUMN COLORS */
+.expected {
+  background: #d0f0fd;
+}
+
+.actual {
+  background: #fde0d0;
+}
+
+/* FOOTER */
+.totalRow {
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: right;
+}

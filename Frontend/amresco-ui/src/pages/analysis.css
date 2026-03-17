@@ -1,0 +1,262 @@
+.analysis-container {
+  width: 85%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------------- LOGO ---------------- */
+
+.logo-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.logo {
+  height: 50px;
+}
+
+/* ---------------- TITLE ---------------- */
+
+.title {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.file-name {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ---------------- SUMMARY CARDS ---------------- */
+
+.summary-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  min-width: 140px;
+}
+
+.green { background: #2e8b57; }
+.orange { background: #f39c12; }
+.red { background: #e74c3c; }
+.purple { background: #7c3aed; }
+.blue { background: #2563eb; }
+.pink { background: #e83e8c; }
+
+/* ---------------- SECTIONS ---------------- */
+
+.section-box {
+  border: 1px solid #ddd;
+  padding: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f6f7f9;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.arrow {
+  font-size: 18px;
+}
+
+/* ---------------- CONTENT ---------------- */
+
+.section-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 20px;
+  margin-bottom: 15px;
+  background: white;
+  border-radius: 0 0 6px 6px;
+}
+
+.dropdown-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: white;
+  border-radius: 0 0 6px 6px;
+}
+
+/* ---------------- FILTERS ---------------- */
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-container select,
+.filter-container button {
+  padding: 7px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filter-container button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-container button:hover {
+  background: #1d4ed8;
+}
+
+/* ---------------- TABLE ---------------- */
+
+.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.analysis-table th,
+.analysis-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.analysis-table th {
+  background: #f2f2f2;
+  font-weight: 600;
+}
+
+/* ---------------- ANOMALY TABLE ---------------- */
+
+.anomaly-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.anomaly-table th {
+  background: #f5f6fa;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.anomaly-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* ---------------- TAGS ---------------- */
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  margin-right: 6px;
+  margin-bottom: 3px;
+}
+
+/* Forecasted Tag */
+
+.forecast {
+  background: #f97316;
+  color: white;
+}
+
+/* Expected Tag */
+
+.expected {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ---------------- ROW COLORS ---------------- */
+
+.row-underperformingsite {
+  background: #fbe9e7;
+}
+
+.row-abnormalvalue {
+  background: #e8f0fe;
+}
+
+.row-anomalyvalue {
+  background: #fff8e1;
+}
+
+/* ---------------- TOTAL ROW ---------------- */
+
+.total-row {
+  text-align: right;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* ---------------- FORMULA COUNT ---------------- */
+
+.formula-count {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #e83e8c;
+}
+
+/* ---------------- SAVE BUTTON ---------------- */
+
+.save-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.save-btn {
+  background: #2e8b57;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #276a47;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+
+  .summary-cards {
+    flex-direction: column;
+  }
+
+  .analysis-container {
+    width: 95%;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
